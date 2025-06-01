@@ -60,8 +60,7 @@ const Login = () => {
             <div className="infoMessage">
               {information && Array.isArray(information)
                 ? information.map((msg) => (
-                    <p key={msg} className="error">{msg}</p>
-                  ))
+                  <p key={msg} className="error">{msg}</p>))
                 : information && <p className="error">{information}</p>}
             </div>
           </form>
