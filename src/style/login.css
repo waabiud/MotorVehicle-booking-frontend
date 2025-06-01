@@ -1,0 +1,163 @@
+/* login.css */
+
+.loginContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background: linear-gradient(135deg, #2c3e50, #3498db);
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.loginBox {
+  display: flex;
+  width: 800px;
+  height: 500px;
+  background: white;
+  border-radius: 15px;
+  box-shadow: 0 10px 40px rgba(0,0,0,0.3);
+  overflow: hidden;
+}
+
+.loginLeft {
+  flex: 1;
+  background: url('https://images.unsplash.com/photo-1502877338535-766e1452684a?auto=format&fit=crop&w=600&q=80') no-repeat center/cover;
+  color: white;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 2rem;
+}
+
+.appLogo {
+  font-size: 3rem;
+  font-weight: 900;
+  margin-bottom: 0.5rem;
+  text-shadow: 2px 2px 5px rgba(0,0,0,0.6);
+}
+
+.appTagline {
+  font-size: 1.25rem;
+  font-weight: 600;
+  text-shadow: 1px 1px 4px rgba(0,0,0,0.5);
+  text-align: center;
+}
+
+.loginRight {
+  flex: 1;
+  padding: 3rem 4rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  background-color: #f9f9f9;
+}
+
+.formContainer {
+  display: flex;
+  flex-direction: column;
+}
+
+.formContainer input {
+  margin-bottom: 1.25rem;
+  padding: 0.9rem 1.2rem;
+  font-size: 1rem;
+  border: 1.5px solid #ccc;
+  border-radius: 8px;
+  transition: border-color 0.3s ease;
+}
+
+.formContainer input:focus {
+  border-color: #3498db;
+  outline: none;
+}
+
+.loginBtn,
+.signupBtn {
+  padding: 0.85rem 1.2rem;
+  font-size: 1.1rem;
+  font-weight: 700;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.loginBtn {
+  background-color: #3498db;
+  color: white;
+  margin-bottom: 1rem;
+}
+
+.loginBtn:hover {
+  background-color: #2980b9;
+}
+
+.signupBtn {
+  background-color: transparent;
+  color: #3498db;
+  border: 2px solid #3498db;
+}
+
+.signupBtn:hover {
+  background-color: #3498db;
+  color: white;
+}
+
+.separator {
+  text-align: center;
+  margin: 1.2rem 0;
+  font-weight: 600;
+  color: #666;
+  position: relative;
+}
+
+.separator::before,
+.separator::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  width: 40%;
+  height: 1px;
+  background-color: #ccc;
+}
+
+.separator::before {
+  left: 0;
+}
+
+.separator::after {
+  right: 0;
+}
+
+.infoMessage {
+  margin-top: 1rem;
+  text-align: center;
+}
+
+.error {
+  color: white;
+  background-color: #e74c3c;
+  padding: 0.5rem 1rem;
+  border-radius: 12px;
+  margin-bottom: 0.5rem;
+  font-weight: 600;
+}
+
+@media (max-width: 768px) {
+  .loginBox {
+    flex-direction: column;
+    width: 90%;
+    height: auto;
+  }
+
+  .loginLeft {
+    height: 200px;
+    background-position: center;
+    padding: 1.5rem;
+  }
+
+  .loginRight {
+    padding: 2rem 2rem;
+  }
+}
