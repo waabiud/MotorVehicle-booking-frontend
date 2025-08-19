@@ -1,3 +1,4 @@
+import { Analytics } from '@vercel/analytics/react';
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -20,6 +21,7 @@ import { setIconUser, setnewIconUser } from './redux/userSlice';
 
 const App = () => {
   const dispatch = useDispatch();
+
   useEffect(() => {
     dispatch(setIconUser());
   }, [dispatch]);
@@ -28,44 +30,48 @@ const App = () => {
   const currentUser = useSelector((state) => state.user.currentUser);
 
   library.add(faXmark, faBars);
+
   return (
     <>
-      <div className="app">
-        {
-          currentUser && (
-            <div className="hamburguerContainer">
-              <FontAwesomeIcon
-                icon={restoreIcon}
-                id="hamburrguerIcon"
-                onClick={() => {
-                  if (restoreIcon === 'bars') {
-                    dispatch(setnewIconUser('xmark'));
-                    // setIcon('xmark');
-                  } else {
-                    dispatch(setnewIconUser('bars'));
-                  }
-                  document.querySelector('.navContainer').classList.toggle('controlVisibility');
-                }}
-              />
-            </div>
-          )
-        }
-        <div id="mainContainer">
+      <div className='app'>
+        {currentUser && (
+          <div className='hamburguerContainer'>
+            <FontAwesomeIcon
+              icon={restoreIcon}
+              id='hamburrguerIcon'
+              onClick={() => {
+                if (restoreIcon === 'bars') {
+                  dispatch(setnewIconUser('xmark'));
+                } else {
+                  dispatch(setnewIconUser('bars'));
+                }
+                document
+                  .querySelector('.navContainer')
+                  .classList.toggle('controlVisibility');
+              }}
+            />
+          </div>
+        )}
+
+        <div id='mainContainer'>
           <Routes>
-            <Route exact path="/" element={<Login />} />
-            <Route exact path="/login" element={<Login />} />
-            <Route exact path="/motorcycles" element={<Motorcycles />} />
-            <Route exact path="/motorcycle/new" element={<MotorcycleForm />} />
-            <Route path="/motorcycle/:id" element={<MotorcycleDetails />} />
-            <Route path="/reserve/new" element={<Reserve />} />
-            <Route path="/reservations" element={<Reservations />} />
-            <Route path="/delete" element={<DeleteMotorcycles />} />
-            <Route path="/signup" element={<Signup />} />
-            <Route path="/logout" element={<Logout />} />
-            <Route path="*" element={<NotFound />} />
+            <Route exact path='/' element={<Login />} />
+            <Route exact path='/login' element={<Login />} />
+            <Route exact path='/motorcycles' element={<Motorcycles />} />
+            <Route exact path='/motorcycle/new' element={<MotorcycleForm />} />
+            <Route path='/motorcycle/:id' element={<MotorcycleDetails />} />
+            <Route path='/reserve/new' element={<Reserve />} />
+            <Route path='/reservations' element={<Reservations />} />
+            <Route path='/delete' element={<DeleteMotorcycles />} />
+            <Route path='/signup' element={<Signup />} />
+            <Route path='/logout' element={<Logout />} />
+            <Route path='*' element={<NotFound />} />
           </Routes>
         </div>
       </div>
+
+      {/* 👇 Add Analytics at the root level */}
+      <Analytics />
     </>
   );
 };
