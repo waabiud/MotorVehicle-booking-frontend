@@ -1,0 +1,28 @@
+.mv-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.6rem 1rem;
+  border-bottom: 1px solid rgba(0,0,0,0.06);
+  background: #ffffff;
+  gap: 1rem;
+}
+
+.mv-header__left .mv-logo {
+  margin: 0;
+  font-size: 1rem;
+  font-weight: 600;
+  color: #111827;
+  cursor: pointer;
+}
+
+.mv-header__actions {
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+}
+
+/* small screens: compress buttons */
+@media (max-width: 600px) {
+  .mv-header__actions .mv-btn { padding: 0.4rem 0.6rem; font-size: 0.85rem; }
+}

@@ -6,6 +6,7 @@ import { library } from '@fortawesome/fontawesome-svg-core';
 import './App.css';
 import '@fortawesome/fontawesome-free/css/all.min.css';
 import { Route, Routes } from 'react-router-dom';
+import Header from './components/Header';
 import Motorcycles from './components/Motorcycles';
 import Reserve from './components/Reserve';
 import Reservations from './components/Reservations';
@@ -36,6 +37,7 @@ const App = () => {
   return (
     <>
       <div className='app'>
+        <Header />
         {currentUser && (
           <div className='hamburguerContainer'>
             <FontAwesomeIcon
