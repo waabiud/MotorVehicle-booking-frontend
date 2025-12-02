@@ -1,7 +1,7 @@
 const reserveDisplayName = (id, itemArray) => {
-  const element = itemArray.filter((el) => el.id === id);
-  const itemName = element[0]?.name;
-  return itemName;
+  if (!Array.isArray(itemArray)) return null;
+  const item = itemArray.find((el) => el.id === id);
+  return item?.name ?? null;
 };
 
 export default reserveDisplayName;

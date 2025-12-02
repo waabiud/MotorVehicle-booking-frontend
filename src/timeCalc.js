@@ -1,65 +1,41 @@
-const today = new Date();
-
-const timeCalculation = (fulldate) => {
-  if (fulldate.fromFullDate && fulldate.toFullDate) {
-    const dateTimeDiferenceMs = (fulldate.toFullDate - fulldate.fromFullDate);
-    const dateTimeDiferenceS = dateTimeDiferenceMs / 1000;
-    const dateTimeDiferenceM = dateTimeDiferenceS / 60;
-    const dateTimeDiferenceH = dateTimeDiferenceM / 60;
-    return dateTimeDiferenceH.toFixed(1);
-  }
-  return null;
-};
-
 const moneyDisplay = (money) => new Intl.NumberFormat('en-US', {
   style: 'currency',
   currency: 'USD',
 }).format(money);
 
-function validateTime1(time) {
-  if (time) {
-    const time1 = new Date(time);
-    if (time1.getFullYear() > today.getFullYear()) {
-      return true;
+// calculate hours difference (returns string like "2.5")
+const timeCalculation = (fulldate) => {
+  if (fulldate?.fromFullDate && fulldate?.toFullDate) {
+    const from = new Date(fulldate.fromFullDate);
+    const to = new Date(fulldate.toFullDate);
+    if (Number.isNaN(from.getTime()) || Number.isNaN(to.getTime())) {
+      return null;
     }
-
-    if (time1.getFullYear() === today.getFullYear()) {
-      if (time1.getMonth() > today.getMonth()) {
-        return true;
-      }
-      if (time1.getMonth() === today.getMonth()) {
-        if (time1.getDate() >= today.getDate()) {
-          return true;
-        }
-        return false;
-      }
-    }
+    const diffMs = to - from;
+    const diffHours = diffMs / (1000 * 60 * 60);
+    // return with one decimal place as before
+    return diffHours.toFixed(1);
   }
-  return false;
+  return null;
+};
+
+function validateTime1(time) {
+  if (!time) return false;
+  const time1 = new Date(time);
+  if (Number.isNaN(time1.getTime())) return false;
+  // Consider valid if time1 is today or in the future (compared to start of today)
+  const todayStart = new Date();
+  todayStart.setHours(0, 0, 0, 0);
+  return time1.getTime() >= todayStart.getTime();
 }
 
 function validateTime2(timeFrom, timeTo) {
-  if (timeTo) {
-    const time1 = new Date(timeFrom);
-    const time2 = new Date(timeTo);
-
-    if (today.getFullYear() < time2.getFullYear() && time2.getFullYear() > time1.getFullYear()) {
-      return true;
-    }
-
-    if (time2.getFullYear() === today.getFullYear()
-      && time2.getFullYear() === time1.getFullYear()) {
-      if (time2.getMonth() > time1.getMonth()) {
-        return true;
-      }
-      if (time2.getMonth() === time1.getMonth()) {
-        if (time2.getDate() >= time1.getDate()) {
-          return true;
-        }
-      }
-    }
-  }
-  return false;
+  if (!timeFrom || !timeTo) return false;
+  const from = new Date(timeFrom);
+  const to = new Date(timeTo);
+  if (Number.isNaN(from.getTime()) || Number.isNaN(to.getTime())) return false;
+  // valid when 'to' is equal or after 'from'
+  return to.getTime() >= from.getTime();
 }
 
 export {

@@ -1,4 +1,3 @@
-import { Analytics } from '@vercel/analytics/react';
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -31,23 +30,26 @@ const App = () => {
 
   library.add(faXmark, faBars);
 
+  // map the stored icon name to the actual icon definition used by FontAwesomeIcon
+  const resolvedIcon = restoreIcon === 'xmark' ? faXmark : faBars;
+
   return (
     <>
       <div className='app'>
         {currentUser && (
           <div className='hamburguerContainer'>
             <FontAwesomeIcon
-              icon={restoreIcon}
+              icon={resolvedIcon}
               id='hamburrguerIcon'
               onClick={() => {
+                // flip the stored icon name
                 if (restoreIcon === 'bars') {
                   dispatch(setnewIconUser('xmark'));
                 } else {
                   dispatch(setnewIconUser('bars'));
                 }
-                document
-                  .querySelector('.navContainer')
-                  .classList.toggle('controlVisibility');
+                // guard against missing element
+                document.querySelector('.navContainer')?.classList.toggle('controlVisibility');
               }}
             />
           </div>
@@ -69,9 +71,6 @@ const App = () => {
           </Routes>
         </div>
       </div>
-
-      {/* 👇 Add Analytics at the root level */}
-      <Analytics />
     </>
   );
 };
